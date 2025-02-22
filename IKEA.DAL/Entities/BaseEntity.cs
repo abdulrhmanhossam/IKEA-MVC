@@ -1,6 +1,6 @@
 ﻿namespace IKEA.DAL.Entities;
 
-class BaseEntity
+public class BaseEntity
 {
     public int Id { get; set; }
     public int CreatedBy { get; set; }
