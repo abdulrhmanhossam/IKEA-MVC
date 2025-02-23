@@ -25,15 +25,18 @@ class DepartmentRepository : IDepartmentRepository
     }
     public int Add(Department department)
     {
-        throw new NotImplementedException();
+        _dbContext.Departments.Add(department);
+        return _dbContext.SaveChanges();
     }
     public int Update(Department department)
     {
-        throw new NotImplementedException();
+        _dbContext.Departments.Update(department);
+        return _dbContext.SaveChanges();
     }
 
     public int Delete(Department department)
     {
-        throw new NotImplementedException();
+        _dbContext.Departments.Remove(department);
+        return _dbContext.SaveChanges();
     }
 }
