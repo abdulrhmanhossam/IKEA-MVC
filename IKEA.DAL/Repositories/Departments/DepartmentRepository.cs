@@ -1,10 +1,11 @@
 ﻿using IKEA.DAL.Data;
 using IKEA.DAL.Entities.Departments;
+using IKEA.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace IKEA.DAL.Repositories.Departments;
 
-class DepartmentRepository : IDepartmentRepository
+public class DepartmentRepository : IDepartmentRepository
 {
     private readonly AppDbContext _dbContext;
 
@@ -18,7 +19,10 @@ class DepartmentRepository : IDepartmentRepository
             return _dbContext.Departments.AsNoTracking().ToList();
         return _dbContext.Departments.ToList();
     }
-
+    public IQueryable<Department> GetAllAsQueryable()
+    {
+        return _dbContext.Departments;
+    }
     public Department? GetById(int id)
     {
         return _dbContext.Departments.Find(id);
@@ -33,7 +37,6 @@ class DepartmentRepository : IDepartmentRepository
         _dbContext.Departments.Update(department);
         return _dbContext.SaveChanges();
     }
-
     public int Delete(Department department)
     {
         _dbContext.Departments.Remove(department);
