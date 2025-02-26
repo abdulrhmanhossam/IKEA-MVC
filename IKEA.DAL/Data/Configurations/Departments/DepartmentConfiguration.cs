@@ -21,7 +21,7 @@ class DepartmentConfiguration : IEntityTypeConfiguration<Department>
             .IsRequired();
         builder
             .Property(d => d.CreatedAt)
-            .HasDefaultValueSql("GETDATE()");
+            .HasDefaultValueSql("GETUTCDATE()");
         builder
             .Property(d => d.LastModificationAt)
             .HasComputedColumnSql("GETDATE()");

@@ -59,7 +59,6 @@ public class DepartmentService : IDepartmentService
             Name = depatmentDto.Name,
             Description = depatmentDto.Description,
             CreationDate = depatmentDto.CreationDate,
-            CreatedBy = 1,
             LastModificationBy = 1,
             LastModificationAt = DateTime.UtcNow
         };
@@ -84,6 +83,10 @@ public class DepartmentService : IDepartmentService
     public bool DeleteDepartment(int id)
     {
         var department = _departmentRepository.GetById(id);
-        return  _departmentRepository.Delete(department!) > 0;
+
+        if (department is not null)
+            return _departmentRepository.Delete(department!) > 0;
+
+        return false;
     }
 }
