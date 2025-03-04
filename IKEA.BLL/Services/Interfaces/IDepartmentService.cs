@@ -4,10 +4,10 @@ namespace IKEA.BLL.Services.Interfaces;
 
 public interface IDepartmentService
 {
-    IEnumerable<DepatmentDto> GetAllDepartments();
-    DepatmentDetailsDto? GetADepartmentById(int id);
-    int CreateDepatment(CreatedDepatmentDto createdDepatmentDto);
-    int UpdateDepartment(DepatmentDto depatmentDto);
+    IEnumerable<DepartmentDto> GetAllDepartments();
+    DepartmentDetailsDto? GetDepartmentById(int id);
+    int CreateDepatment(CreatedDepartmentDto createdDepatmentDto);
+    int UpdateDepartment(DepartmentDto depatmentDto);
     bool DeleteDepartment(int id);
 
 }

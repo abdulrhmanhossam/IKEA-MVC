@@ -1,6 +1,6 @@
 ﻿namespace IKEA.BLL.Models;
 
-public class DepatmentDetailsDto
+public class DepartmentDetailsDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;

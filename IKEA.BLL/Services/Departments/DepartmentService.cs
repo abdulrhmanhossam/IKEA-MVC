@@ -15,27 +15,26 @@ public class DepartmentService : IDepartmentService
         _departmentRepository = departmentRepository;
     }
 
-    public IEnumerable<DepatmentDto> GetAllDepartments()
+    public IEnumerable<DepartmentDto> GetAllDepartments()
     {
         var departments = _departmentRepository.GetAllAsQueryable()
-            .Select(department => new DepatmentDto
+            .Select(department => new DepartmentDto
             {
                 Id = department.Id,
                 Name = department.Name,
                 Code = department.Code,
-                Description = department.Description,
                 CreationDate = department.CreationDate,
             }).AsNoTracking().ToList();
 
         return departments;
     }
 
-    public DepatmentDetailsDto? GetADepartmentById(int id)
+    public DepartmentDetailsDto? GetDepartmentById(int id)
     {
         var department = _departmentRepository.GetById(id);
         if (department is not null)
         {
-            return new DepatmentDetailsDto
+            return new DepartmentDetailsDto
             {
                 Id = department!.Id,
                 Name = department.Name,
@@ -51,13 +50,12 @@ public class DepartmentService : IDepartmentService
         return null;
     }
 
-    public int UpdateDepartment(DepatmentDto depatmentDto)
+    public int UpdateDepartment(DepartmentDto depatmentDto)
     {
         var department = new Department
         {
             Code = depatmentDto.Code,
             Name = depatmentDto.Name,
-            Description = depatmentDto.Description,
             CreationDate = depatmentDto.CreationDate,
             LastModificationBy = 1,
             LastModificationAt = DateTime.UtcNow
@@ -65,7 +63,7 @@ public class DepartmentService : IDepartmentService
         return _departmentRepository.Update(department);
     }
 
-    public int CreateDepatment(CreatedDepatmentDto createdDepatmentDto)
+    public int CreateDepatment(CreatedDepartmentDto createdDepatmentDto)
     {
         var department = new Department
         {

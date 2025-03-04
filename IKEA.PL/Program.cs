@@ -1,3 +1,5 @@
+using IKEA.BLL.Services.Departments;
+using IKEA.BLL.Services.Interfaces;
 using IKEA.DAL.Data;
 using IKEA.DAL.Repositories.Departments;
 using IKEA.DAL.Repositories.Interfaces;
@@ -8,11 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<AppDbContext>((options) => 
+builder.Services.AddDbContext<AppDbContext>((options) =>
     options.UseSqlServer(builder.Configuration
     .GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
 var app = builder.Build();
 
