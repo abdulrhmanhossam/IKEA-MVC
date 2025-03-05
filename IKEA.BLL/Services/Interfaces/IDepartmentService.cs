@@ -6,7 +6,7 @@ public interface IDepartmentService
 {
     IEnumerable<DepartmentDto> GetAllDepartments();
     DepartmentDetailsDto? GetDepartmentById(int id);
-    int CreateDepatment(CreatedDepartmentDto createdDepatmentDto);
+    int CreateDepartment(CreatedDepartmentDto createdDepatmentDto);
     int UpdateDepartment(UpdatedDepartmentDto depatmentDto);
     bool DeleteDepartment(int id);
 

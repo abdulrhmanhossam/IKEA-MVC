@@ -69,7 +69,7 @@ public class DepartmentService : IDepartmentService
         return _departmentRepository.Update(existingDepartment);
     }
 
-    public int CreateDepatment(CreatedDepartmentDto createdDepatmentDto)
+    public int CreateDepartment(CreatedDepartmentDto createdDepatmentDto)
     {
         var department = new Department
         {

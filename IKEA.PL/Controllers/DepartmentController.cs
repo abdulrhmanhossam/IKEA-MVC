@@ -42,7 +42,7 @@ public class DepartmentController : Controller
         try
         {
             var department = _departmentService
-                    .CreateDepatment(depatmentDto);
+                    .CreateDepartment(depatmentDto);
 
             if (department > 0)
                 return RedirectToAction("Index");
