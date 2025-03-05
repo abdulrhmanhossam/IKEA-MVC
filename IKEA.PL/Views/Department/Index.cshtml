@@ -6,7 +6,6 @@
 
 <h1>All Departments</h1>
 <br />
-<br />
 <a asp-controller="Department" asp-action="Create" class="btn btn-primary">
     Create New Department
 </a>
@@ -37,7 +36,7 @@
                         </a>
                     </td>
                     <td>
-                        <a asp-action="Update" asp-controller="Department" asp-route-id="@department.Id" class="btn btn-success">
+                        <a asp-action="Edit" asp-controller="Department" asp-route-id="@department.Id" class="btn btn-success">
                             <li class="fas fa-edit"></li>Update
                         </a>
                     </td>

@@ -50,17 +50,23 @@ public class DepartmentService : IDepartmentService
         return null;
     }
 
-    public int UpdateDepartment(DepartmentDto depatmentDto)
+    public int UpdateDepartment(UpdatedDepartmentDto depatmentDto)
     {
-        var department = new Department
+        var existingDepartment = _departmentRepository
+            .GetById(depatmentDto.Id);
+        if (existingDepartment == null)
         {
-            Code = depatmentDto.Code,
-            Name = depatmentDto.Name,
-            CreationDate = depatmentDto.CreationDate,
-            LastModificationBy = 1,
-            LastModificationAt = DateTime.UtcNow
-        };
-        return _departmentRepository.Update(department);
+            throw new Exception("Department not found");
+        }
+
+        existingDepartment.Code = depatmentDto.Code;
+        existingDepartment.Name = depatmentDto.Name;
+        existingDepartment.CreationDate = depatmentDto.CreationDate;
+        existingDepartment.Description = depatmentDto.Description;
+        existingDepartment.LastModificationBy = 1;
+        existingDepartment.LastModificationAt = DateTime.UtcNow;
+
+        return _departmentRepository.Update(existingDepartment);
     }
 
     public int CreateDepatment(CreatedDepartmentDto createdDepatmentDto)
