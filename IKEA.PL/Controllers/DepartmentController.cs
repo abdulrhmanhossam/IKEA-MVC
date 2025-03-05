@@ -126,4 +126,42 @@ public class DepartmentController : Controller
         ModelState.AddModelError(string.Empty, message);
         return View(departmentDto);
     }
+
+    [HttpGet]
+    public IActionResult Delete(int? id)
+    {
+        if (id is null)
+            return BadRequest();
+
+        var department = _departmentService
+            .GetDepartmentById(id.Value);
+
+        if (department is null)
+            return NotFound();
+
+        return View("Delete", department);
+    }
+
+    [HttpPost]
+    public IActionResult Delete(int id)
+    {
+        try
+        {
+            var message = string.Empty;
+
+            var departmentDeleted = _departmentService
+                .DeleteDepartment(id);
+
+            if (departmentDeleted)
+                return RedirectToAction("Index");
+
+            message = "Sorry an Error During Delete";
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+        }
+
+        return RedirectToAction("Index");
+    }
 }

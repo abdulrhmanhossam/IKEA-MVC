@@ -26,6 +26,7 @@
         <tbody class="text-center">
             @foreach (var department in Model)
             {
+
                 <tr>
                     <td>@department.Code</td>
                     <td>@department.Name</td>
@@ -41,11 +42,36 @@
                         </a>
                     </td>
                     <td>
-                        <a asp-action="Delete" asp-controller="Department" asp-route-id="@department.Id" class="btn btn-danger">
-                            <li class="fas fa-trash"></li>Delete
-                        </a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@department.Id">
+                            <i class="fas fa-trash"></i>Delete
+                        </button>
+         
                     </td>
                 </tr>
+
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal-@department.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">DeleteDepartment</h1>
+                                
+                            </div>
+                            <div class="modal-body">
+                                Are You Sure To Delete This Department
+                            </div>
+                            <div class="modal-footer">
+                                <form asp-action="Delete" asp-route-id="@department.Id" method="post">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             }
         </tbody>
     </table>
