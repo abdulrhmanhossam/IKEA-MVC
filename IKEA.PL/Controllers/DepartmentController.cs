@@ -68,7 +68,9 @@ public class DepartmentController : Controller
     {
         if (id is null)
             return BadRequest();
-        var department = _departmentService.GetDepartmentById(id.Value);
+
+        var department = _departmentService
+            .GetDepartmentById(id.Value);
 
         if (department is null)
             return NotFound();
@@ -87,13 +89,13 @@ public class DepartmentController : Controller
 
         if (department is null)
             return NotFound();
+
         var departmentDto = new UpdatedDepartmentDto
         {
             Code = department.Code,
             Name = department.Name,
             Description = department.Description,
             CreationDate = department.CreationDate,
-
         };
         return View(departmentDto);
     }
