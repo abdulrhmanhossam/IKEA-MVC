@@ -2,7 +2,6 @@ using IKEA.BLL.Services.Departments;
 using IKEA.BLL.Services.Interfaces;
 using IKEA.DAL.Data;
 using IKEA.DAL.Repositories.Departments;
-using IKEA.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
