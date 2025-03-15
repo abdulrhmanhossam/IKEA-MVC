@@ -36,6 +36,6 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
             .Property(e => e.EmployeeType)
             .HasConversion(
             (type) => type.ToString(),
-            (type) => (EmployeeType)Enum.Parse(typeof(Gender), type));
+            (type) => (EmployeeType)Enum.Parse(typeof(EmployeeType), type));
     }
 }

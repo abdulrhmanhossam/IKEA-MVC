@@ -1,4 +1,5 @@
-﻿using IKEA.BLL.Services.Employees;
+﻿using IKEA.BLL.Models.Employees;
+using IKEA.BLL.Services.Employees;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IKEA.PL.Controllers;
@@ -24,5 +25,48 @@ public class EmployeeController : Controller
         var employees = _employeeService.GetAllEmployees();
 
         return View(employees);
+    }
+
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Create(CreatedEmployeeDto employeeDto)
+    {
+        if (!ModelState.IsValid)
+            return View(employeeDto);
+
+        var message = string.Empty;
+
+        try
+        {
+            var result = _employeeService.CreateEmployee(employeeDto);
+
+            if (result > 0)
+                return RedirectToAction("Index");
+            else
+            {
+                message = "Employee Not Created";
+
+                ModelState.AddModelError(string.Empty, message);
+
+                return View(employeeDto);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+
+            message = _environment.IsDevelopment()
+                ? ex.Message
+                : "Sorry an Error During Creating the Employee";
+
+            ModelState.AddModelError(string.Empty, message);
+
+            return View(employeeDto);
+        }
     }
 }
