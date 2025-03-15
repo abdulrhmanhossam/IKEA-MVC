@@ -1,5 +1,4 @@
-﻿using IKEA.BLL.Models;
-using IKEA.BLL.Services.Interfaces;
+﻿using IKEA.BLL.Models.Departments;
 using IKEA.DAL.Entities.Departments;
 using IKEA.DAL.Repositories.Departments;
 using Microsoft.EntityFrameworkCore;

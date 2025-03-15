@@ -1,5 +1,5 @@
-﻿using IKEA.BLL.Models;
-using IKEA.BLL.Services.Interfaces;
+﻿using IKEA.BLL.Models.Departments;
+using IKEA.BLL.Services.Departments;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IKEA.PL.Controllers;

@@ -1,6 +1,6 @@
-﻿using IKEA.BLL.Models;
+﻿using IKEA.BLL.Models.Departments;
 
-namespace IKEA.BLL.Services.Interfaces;
+namespace IKEA.BLL.Services.Departments;
 
 public interface IDepartmentService
 {

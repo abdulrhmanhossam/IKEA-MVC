@@ -1,7 +1,8 @@
 using IKEA.BLL.Services.Departments;
-using IKEA.BLL.Services.Interfaces;
+using IKEA.BLL.Services.Employees;
 using IKEA.DAL.Data;
 using IKEA.DAL.Repositories.Departments;
+using IKEA.DAL.Repositories.Employees;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,9 @@ builder.Services.AddDbContext<AppDbContext>((options) =>
 
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 var app = builder.Build();
 

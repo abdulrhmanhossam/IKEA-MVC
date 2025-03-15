@@ -1,4 +1,4 @@
-﻿namespace IKEA.BLL.Models;
+﻿namespace IKEA.BLL.Models.Departments;
 
 public class DepartmentDetailsDto
 {
