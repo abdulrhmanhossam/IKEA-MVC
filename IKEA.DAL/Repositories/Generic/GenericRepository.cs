@@ -15,8 +15,13 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     public IEnumerable<T> GetAll(bool noTracking = true)
     {
         if (noTracking)
-            return _dbContext.Set<T>().AsNoTracking().ToList();
-        return _dbContext.Set<T>().ToList();
+            return _dbContext.Set<T>()
+                .Where(x => !x.IsDeleted)
+                .AsNoTracking().ToList();
+
+        return _dbContext.Set<T>()
+            .Where(x => !x.IsDeleted)
+            .ToList();
     }
     public IQueryable<T> GetAllAsQueryable()
     {
@@ -38,7 +43,8 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     }
     public int Delete(T entity)
     {
-        _dbContext.Set<T>().Remove(entity);
+        entity.IsDeleted = true;
+        _dbContext.Set<T>().Update(entity);
         return _dbContext.SaveChanges();
     }
 }
