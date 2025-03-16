@@ -69,4 +69,16 @@ public class EmployeeController : Controller
             return View(employeeDto);
         }
     }
+
+    [HttpGet]
+    public IActionResult Details(int? id)
+    {
+        if (id is null) return BadRequest();
+
+        var employee = _employeeService.GetEmployeeById(id.Value);
+
+        if (employee is null) return NotFound();
+
+        return View(employee);
+    }
 }
