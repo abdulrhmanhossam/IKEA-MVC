@@ -81,4 +81,58 @@ public class EmployeeController : Controller
 
         return View(employee);
     }
+
+    [HttpGet]
+    public IActionResult Edit(int? id)
+    {
+        if (id is null) return BadRequest();
+
+        var employee = _employeeService.GetEmployeeById(id.Value);
+
+        if (employee is null) return NotFound();
+
+        return View(new UpdateEmployeeDto
+        {
+            Name = employee.Name,
+            Address = employee.Address,
+            Email = employee.Email,
+            Age = employee.Age,
+            Salary = employee.Salary,
+            PhoneNumber = employee.PhoneNumber,
+            IsActive = employee.IsActive,
+            EmployeeType = employee.EmployeeType,
+            Gender = employee.Gender,
+            HiringDate = employee.HiringDate,
+
+        });
+    }
+
+    [HttpPost]
+    public IActionResult Edit([FromRoute] int id, UpdateEmployeeDto employeeDto)
+    {
+        if (!ModelState.IsValid) return View(employeeDto);
+
+        var message = string.Empty;
+
+        try
+        {
+            var updated = _employeeService.UpdateEmployee(employeeDto) > 0;
+
+            if (updated) return RedirectToAction("Index");
+
+            message = "Employee is not Updated";
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+
+            if (_environment.IsDevelopment())
+                message = ex.Message;
+            else
+                message = "the employee not created";
+        }
+
+        ModelState.AddModelError(string.Empty, message);
+        return View(employeeDto);
+    }
 }
