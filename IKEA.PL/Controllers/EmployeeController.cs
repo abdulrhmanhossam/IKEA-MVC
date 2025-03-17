@@ -135,4 +135,29 @@ public class EmployeeController : Controller
         ModelState.AddModelError(string.Empty, message);
         return View(employeeDto);
     }
+
+
+    public IActionResult Delete(int id)
+    {
+        var message = string.Empty;
+
+        try
+        {
+            var deleted = _employeeService.DeleteEmployee(id);
+
+            if (deleted) return RedirectToAction("Index");
+
+            message = "Error During Delete";
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+
+            message = _environment.IsDevelopment()
+                ? ex.Message
+                : "Error During Delete";
+        }
+
+        return RedirectToAction("Index");
+    }
 }

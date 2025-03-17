@@ -71,6 +71,7 @@ public class EmployeeService : IEmployeeService
     public IEnumerable<EmployeeDto> GetAllEmployees()
     {
         return _employeeRepository.GetAllAsQueryable()
+            .Where(e => !e.IsDeleted)
             .Select(e => new EmployeeDto
             {
                 Id = e.Id,
