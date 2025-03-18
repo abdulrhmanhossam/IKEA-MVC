@@ -34,6 +34,7 @@ public class EmployeeController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Create(CreatedEmployeeDto employeeDto)
     {
         if (!ModelState.IsValid)
@@ -108,6 +109,7 @@ public class EmployeeController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Edit([FromRoute] int id, UpdateEmployeeDto employeeDto)
     {
         if (!ModelState.IsValid) return View(employeeDto);
@@ -136,7 +138,8 @@ public class EmployeeController : Controller
         return View(employeeDto);
     }
 
-
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Delete(int id)
     {
         var message = string.Empty;

@@ -33,6 +33,7 @@ public class DepartmentController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Create(CreatedDepartmentDto depatmentDto)
     {
         if (!ModelState.IsValid)
@@ -101,6 +102,7 @@ public class DepartmentController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Edit(UpdatedDepartmentDto departmentDto)
     {
         if (!ModelState.IsValid)
@@ -143,6 +145,7 @@ public class DepartmentController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Delete(int id)
     {
         try
