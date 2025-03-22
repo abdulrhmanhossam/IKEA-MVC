@@ -25,5 +25,11 @@ class DepartmentConfiguration : IEntityTypeConfiguration<Department>
         builder
             .Property(d => d.LastModificationAt)
             .HasComputedColumnSql("GETDATE()");
+
+        builder
+            .HasMany(d => d.Employees)
+            .WithOne(e => e.Department)
+            .HasForeignKey(e => e.DepartmentId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }
